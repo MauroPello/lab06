@@ -17,6 +17,7 @@ public final class UseListsAndMaps {
     }
 
     private static final int ELEMS = 1_000;
+    private static final int START_STEP = 1_000;
     private static final int TESTS = 1_000;
 
     /**
@@ -29,8 +30,8 @@ public final class UseListsAndMaps {
          * from 1000 (included) to 2000 (excluded).
          */
         List<Integer> arrayList = new ArrayList<>();
-        for (int i = 0; i < ELEMS; i++) {
-            arrayList.add(i + 1000);
+        for (int i = START_STEP; i < START_STEP + ELEMS; i++) {
+            arrayList.add(i);
         }
         /*
          * 2) Create a new LinkedList<Integer> and, in a single line of code
