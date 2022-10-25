@@ -29,28 +29,28 @@ public final class UseListsAndMaps {
          * 1) Create a new ArrayList<Integer>, and populate it with the numbers
          * from 1000 (included) to 2000 (excluded).
          */
-        List<Integer> arrayList = new ArrayList<>();
+        final List<Integer> firstList = new ArrayList<>();
         for (int i = START_STEP; i < START_STEP + ELEMS; i++) {
-            arrayList.add(i);
+            firstList.add(i);
         }
         /*
          * 2) Create a new LinkedList<Integer> and, in a single line of code
          * without using any looping construct (for, while), populate it with
          * the same contents of the list of point 1.
          */
-        List<Integer> linkedList = new LinkedList<>(arrayList);
+        final List<Integer> secondList = new LinkedList<>(firstList);
         /*
          * 3) Using "set" and "get" and "size" methods, swap the first and last
          * element of the first list. You can not use any "magic number".
          * (Suggestion: use a temporary variable)
          */
-        Integer tmp = arrayList.get(arrayList.size() - 1);
-        arrayList.set(arrayList.size() - 1, arrayList.get(0));
-        arrayList.set(0, tmp);
+        final int tmp = firstList.get(firstList.size() - 1);
+        firstList.set(firstList.size() - 1, firstList.get(0));
+        firstList.set(0, tmp);
         /*
          * 4) Using a single for-each, print the contents of the arraylist.
          */
-        for (Integer i : arrayList) {
+        for (final int i : firstList) {
             System.out.println(i);
         }
         /*
@@ -62,18 +62,19 @@ public final class UseListsAndMaps {
          */
         long time = System.nanoTime();
         for (int i = 0; i < TESTS; i++) {
-            arrayList.add(0, i);
+            firstList.add(0, i);
         }
         time = System.nanoTime() - time;
-        final var millis = TimeUnit.NANOSECONDS.toMillis(time);
+        var millis = TimeUnit.NANOSECONDS.toMillis(time);
         System.out.println("ArrayList took " + time + "ns (" + millis + "ms)");
         
         time = System.nanoTime();
         for (int i = 0; i < TESTS; i++) {
-            linkedList.add(0, i);
+            secondList.add(0, i);
         }
-        System.out.println("LinkedList took " + time + "ns (" + millis + "ms)");
         time = System.nanoTime() - time;
+        millis = TimeUnit.NANOSECONDS.toMillis(time);
+        System.out.println("LinkedList took " + time + "ns (" + millis + "ms)");
         /*
          * 6) Measure the performance of reading 1000 times an element whose
          * position is in the middle of the collection for both ArrayList and
@@ -82,17 +83,19 @@ public final class UseListsAndMaps {
          */
         time = System.nanoTime();
         for (int i = 0; i < ELEMS; i++) {
-            arrayList.get(arrayList.size() / 2);
+            firstList.get(firstList.size() / 2);
         }
         time = System.nanoTime() - time;
-        System.out.println("ArrayList took " + time + "ns (" + millis + "ms)");
+        millis = TimeUnit.NANOSECONDS.toMillis(time);
+        System.out.println("LinkedList took " + time + "ns (" + millis + "ms)");
         
         time = System.nanoTime();
         for (int i = 0; i < ELEMS; i++) {
-            linkedList.get(linkedList.size() / 2);
+            secondList.get(secondList.size() / 2);
         }
-        System.out.println("LinkedList took " + time + "ns (" + millis + "ms)");
         time = System.nanoTime() - time;
+        millis = TimeUnit.NANOSECONDS.toMillis(time);
+        System.out.println("LinkedList took " + time + "ns (" + millis + "ms)");
         /*
          * 7) Build a new Map that associates to each continent's name its
          * population:
@@ -109,7 +112,7 @@ public final class UseListsAndMaps {
          *
          * Oceania -> 38,304,000
          */
-        Map<String, Long> continents = new HashMap<>();
+        final Map<String, Long> continents = new HashMap<>();
         continents.put("Africa", 1_110_635_000L);
         continents.put("Americas", 972_005_000L);
         continents.put("Antarctica", 0L);
